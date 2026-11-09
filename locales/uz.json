@@ -1,0 +1,77 @@
+{
+  "nav": {
+    "home": "Bosh sahifa",
+    "learning": "O'quv markazi",
+    "threats": "Tahdidlar",
+    "tools": "Vositalar",
+    "quiz": "Testlar",
+    "aiMentor": "AI Mentor",
+    "login": "Kirish",
+    "register": "Ro'yxatdan o'tish",
+    "dashboard": "Boshqaruv paneli",
+    "logout": "Chiqish"
+  },
+  "hero": {
+    "badge": "Professional kiberxavfsizlik ta'limi",
+    "title": "Kiberxavfsizlikni o'rganing.",
+    "titleHighlight": "Raqamli dunyongizni himoya qiling.",
+    "description": "CyberShield — noldan professional darajagacha kiberxavfsizlikni o'rganish, interaktiv mashqlar bajarish va AI Mentor bilan muloqot qilish uchun zamonaviy platforma.",
+    "getStarted": "Boshlash",
+    "explore": "Kurslarni ko'rish",
+    "stat1": "30+",
+    "stat1Label": "Dars",
+    "stat2": "100+",
+    "stat2Label": "Test savollari",
+    "stat3": "3",
+    "stat3Label": "Til"
+  },
+  "features": {
+    "title": "Nima uchun CyberShield?",
+    "subtitle": "Zamonaviy va amaliy kiberxavfsizlik ta'limi",
+    "f1Title": "To'liq o'quv dasturi",
+    "f1Desc": "Boshlang'ichdan ilg'or darajagacha tuzilgan darslar: phishing, tarmoq xavfsizligi, OWASP va boshqalar.",
+    "f2Title": "AI Cybersecurity Mentor",
+    "f2Desc": "Savollaringizga javob beruvchi, tushuntirishlar beruvchi va keyingi qadamlarni tavsiya qiluvchi sun'iy intellekt yordamchisi.",
+    "f3Title": "Interaktiv vositalar",
+    "f3Desc": "Parol tekshiruvchi, phishing simulyatori, URL analizatori va boshqa xavfsiz o'quv vositalari.",
+    "f4Title": "Progress va yutuqlar",
+    "f4Desc": "O'qish jarayonini kuzating, test natijalarini saqlang va yutuqlarni oching."
+  },
+  "cta": {
+    "title": "Bugun o'rganishni boshlang",
+    "description": "Bepul ro'yxatdan o'ting va kiberxavfsizlik bo'yicha birinchi darsingizni o'ting.",
+    "button": "Ro'yxatdan o'tish"
+  },
+  "auth": {
+    "loginTitle": "Hisobingizga kiring",
+    "loginSubtitle": "CyberShield platformasiga xush kelibsiz",
+    "registerTitle": "Yangi hisob yarating",
+    "registerSubtitle": "Kiberxavfsizlikni o'rganishni boshlang",
+    "username": "Foydalanuvchi nomi",
+    "password": "Parol",
+    "confirmPassword": "Parolni tasdiqlang",
+    "loginBtn": "Kirish",
+    "registerBtn": "Ro'yxatdan o'tish",
+    "noAccount": "Hisobingiz yo'qmi?",
+    "hasAccount": "Allaqachon hisobingiz bormi?",
+    "usernameHint": "3-20 belgi, harflar, raqamlar va _",
+    "passwordHint": "Kamida 6 belgi"
+  },
+  "footer": {
+    "tagline": "Kiberxavfsizlikni o'rganing. Raqamli dunyongizni himoya qiling.",
+    "product": "Mahsulot",
+    "resources": "Resurslar",
+    "company": "Kompaniya",
+    "rights": "Barcha huquqlar himoyalangan."
+  },
+  "common": {
+    "loading": "Yuklanmoqda...",
+    "error": "Xatolik yuz berdi",
+    "success": "Muvaffaqiyatli",
+    "save": "Saqlash",
+    "cancel": "Bekor qilish",
+    "search": "Qidirish...",
+    "theme": "Mavzu",
+    "language": "Til"
+  }
+}

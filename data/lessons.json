@@ -1,0 +1,168 @@
+{
+  "levels": [
+    {
+      "id": "beginner",
+      "title": "Beginner",
+      "title_uz": "Boshlang'ich",
+      "title_ru": "Начальный",
+      "lessons": [
+        {
+          "id": "intro-cybersecurity",
+          "title": "Introduction to Cybersecurity",
+          "title_uz": "Kiberxavfsizlikka kirish",
+          "title_ru": "Введение в кибербезопасность",
+          "order": 1,
+          "duration": "12 min",
+          "objectives": [
+            "Understand what cybersecurity is",
+            "Learn the CIA triad (Confidentiality, Integrity, Availability)",
+            "Recognize common threat actors"
+          ],
+          "content_en": "## What is Cybersecurity?\n\nCybersecurity is the practice of protecting systems, networks, and programs from digital attacks. These attacks usually aim to access, change, or destroy sensitive information, extort money, or interrupt normal business processes.\n\n### The CIA Triad\n\n1. **Confidentiality** — Only authorized people can access information.\n2. **Integrity** — Data remains accurate and unaltered.\n3. **Availability** — Systems and data are available when needed.\n\n### Why it matters\n\nEvery day millions of cyberattacks happen. Learning the basics helps you protect your accounts, devices, and personal data.\n\n### Key tip\nStart with strong unique passwords and enable two-factor authentication on important accounts.",
+          "content_uz": "## Kiberxavfsizlik nima?\n\nKiberxavfsizlik — tizimlar, tarmoqlar va dasturlarni raqamli hujumlardan himoya qilish amaliyotidir. Bu hujumlar odatda maxfiy ma'lumotlarga kirish, o'zgartirish yoki yo'q qilish, pul talab qilish yoki oddiy ishlarni to'xtatish maqsadida amalga oshiriladi.\n\n### CIA triada\n\n1. **Maxfiylik (Confidentiality)** — Faqat ruxsat etilgan odamlar ma'lumotga kira oladi.\n2. **Butunlik (Integrity)** — Ma'lumotlar aniq va o'zgarmagan holda qoladi.\n3. **Mavjudlik (Availability)** — Tizimlar va ma'lumotlar kerak bo'lganda mavjud bo'ladi.\n\n### Nima uchun muhim\n\nHar kuni millionlab kiberhujumlar sodir bo'ladi. Asoslarni o'rganish hisoblaringiz, qurilmalaringiz va shaxsiy ma'lumotlaringizni himoya qilishga yordam beradi.",
+          "content_ru": "## Что такое кибербезопасность?\n\nКибербезопасность — это практика защиты систем, сетей и программ от цифровых атак. Эти атаки обычно направлены на получение доступа, изменение или уничтожение конфиденциальной информации, вымогательство денег или прерывание обычных бизнес-процессов.\n\n### Триада CIA\n\n1. **Конфиденциальность** — Только уполномоченные лица имеют доступ к информации.\n2. **Целостность** — Данные остаются точными и неизменёнными.\n3. **Доступность** — Системы и данные доступны когда нужно."
+        },
+        {
+          "id": "password-security",
+          "title": "Password Security",
+          "title_uz": "Parol xavfsizligi",
+          "title_ru": "Безопасность паролей",
+          "order": 2,
+          "duration": "15 min",
+          "objectives": [
+            "Create strong passwords",
+            "Understand password managers",
+            "Avoid common password mistakes"
+          ],
+          "content_en": "## Password Security Basics\n\nWeak passwords are one of the most common ways attackers gain access.\n\n### Rules for strong passwords\n- At least 12–16 characters\n- Mix of uppercase, lowercase, numbers, symbols\n- Unique for every important account\n- Avoid personal information (birthday, name, pet)\n\n### Password managers\nUse a reputable password manager to generate and store unique passwords. You only need to remember one strong master password.\n\n### Never do this\n- Reuse the same password across sites\n- Share passwords by email or chat\n- Write passwords on sticky notes near your computer",
+          "content_uz": "## Parol xavfsizligi asoslari\n\nZaif parollar — hujumchilar kirish uchun eng ko'p ishlatadigan usullardan biri.\n\n### Kuchli parol qoidalari\n- Kamida 12–16 belgi\n- Katta/kichik harflar, raqamlar, belgilar aralashmasi\n- Har bir muhim hisob uchun noyob\n- Shaxsiy ma'lumotlardan (tug'ilgan kun, ism) saqlaning",
+          "content_ru": "## Основы безопасности паролей\n\nСлабые пароли — один из самых распространённых способов получения доступа злоумышленниками.\n\n### Правила сильного пароля\n- Минимум 12–16 символов\n- Смесь заглавных, строчных букв, цифр и символов\n- Уникальный для каждого важного аккаунта"
+        },
+        {
+          "id": "phishing-awareness",
+          "title": "Phishing Awareness",
+          "title_uz": "Fishing xabardorligi",
+          "title_ru": "Осведомлённость о фишинге",
+          "order": 3,
+          "duration": "14 min",
+          "objectives": [
+            "Recognize phishing emails and messages",
+            "Identify red flags",
+            "Know what to do if you receive a suspicious message"
+          ],
+          "content_en": "## What is Phishing?\n\nPhishing is a social engineering attack where attackers trick people into revealing sensitive information (passwords, card numbers) or installing malware.\n\n### Common red flags\n- Urgent or threatening language (“Your account will be closed in 24 hours”)\n- Unexpected attachments or links\n- Slightly wrong sender address (support@paypa1.com)\n- Requests for passwords or codes\n- Poor grammar and generic greeting (“Dear user”)\n\n### What to do\n1. Do not click links or open attachments\n2. Hover over links to preview the real URL\n3. Contact the company through official channels\n4. Report the message as phishing",
+          "content_uz": "## Fishing nima?\n\nFishing — ijtimoiy muhandislik hujumi bo'lib, hujumchilar odamlarni maxfiy ma'lumotlarni (parol, karta raqami) oshkor qilishga yoki zararli dastur o'rnatishga undaydi.\n\n### Asosiy ogohlantiruvchi belgilar\n- Shoshilinch yoki tahdidli til\n- Kutilmagan havolalar yoki ilovalar\n- Biroz noto'g'ri yuboruvchi manzili\n- Parol yoki kod so'rash",
+          "content_ru": "## Что такое фишинг?\n\nФишинг — это атака социальной инженерии, при которой злоумышленники обманом заставляют людей раскрывать конфиденциальную информацию или устанавливать вредоносное ПО."
+        },
+        {
+          "id": "two-factor-auth",
+          "title": "Two-Factor Authentication",
+          "title_uz": "Ikki faktorli autentifikatsiya",
+          "title_ru": "Двухфакторная аутентификация",
+          "order": 4,
+          "duration": "10 min",
+          "objectives": [
+            "Understand 2FA / MFA",
+            "Know different types of second factors",
+            "Enable 2FA on important accounts"
+          ],
+          "content_en": "## Two-Factor Authentication (2FA)\n\n2FA adds a second step after your password. Even if someone steals your password, they still need the second factor.\n\n### Types\n- SMS codes (better than nothing, but SIM-swap risk exists)\n- Authenticator apps (Google Authenticator, Authy, Microsoft Authenticator) — recommended\n- Hardware security keys (YubiKey) — strongest\n- Push notifications from official apps\n\n### Best practice\nEnable 2FA on email, banking, social media, and any account that holds sensitive data. Prefer authenticator apps or security keys over SMS.",
+          "content_uz": "## Ikki faktorli autentifikatsiya (2FA)\n\n2FA paroldan keyin ikkinchi qadamni qo'shadi. Kimdir parolingizni o'g'irlasa ham, ikkinchi faktor kerak bo'ladi.",
+          "content_ru": "## Двухфакторная аутентификация (2FA)\n\n2FA добавляет второй шаг после пароля. Даже если кто-то украдёт пароль, ему всё равно понадобится второй фактор."
+        },
+        {
+          "id": "safe-browsing",
+          "title": "Safe Browsing Habits",
+          "title_uz": "Xavfsiz brauzing odatlari",
+          "title_ru": "Безопасный просмотр",
+          "order": 5,
+          "duration": "11 min",
+          "objectives": [
+            "Browse the web more safely",
+            "Recognize insecure sites",
+            "Use browser security features"
+          ],
+          "content_en": "## Safe Browsing\n\n- Prefer HTTPS websites (look for the lock icon)\n- Keep your browser and extensions updated\n- Be careful with free downloads and “crack” sites\n- Use a reputable ad-blocker and tracker blocker\n- Clear cookies/site data for sensitive sessions when needed\n- Avoid entering passwords on public Wi-Fi without a VPN",
+          "content_uz": "## Xavfsiz brauzing\n\n- HTTPS saytlarni afzal ko'ring\n- Brauzer va kengaytmalarni yangilab turing\n- Bepul yuklab olish va “crack” saytlardan ehtiyot bo'ling",
+          "content_ru": "## Безопасный просмотр\n\n- Предпочитайте сайты с HTTPS\n- Обновляйте браузер и расширения\n- Будьте осторожны с бесплатными загрузками"
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "title": "Intermediate",
+      "title_uz": "O'rta",
+      "title_ru": "Средний",
+      "lessons": [
+        {
+          "id": "networks-basics",
+          "title": "Computer Networks Basics",
+          "title_uz": "Kompyuter tarmoqlari asoslari",
+          "title_ru": "Основы компьютерных сетей",
+          "order": 1,
+          "duration": "18 min",
+          "objectives": ["Understand IP, DNS, ports", "Know LAN vs WAN", "Basic network security concepts"],
+          "content_en": "## Computer Networks\n\nA network connects devices so they can share data.\n\n- **IP address** — unique identifier of a device on a network\n- **DNS** — translates domain names (google.com) into IP addresses\n- **Ports** — doors on a computer that services listen on (80/443 for web)\n- **Firewall** — controls what traffic is allowed\n\nUnderstanding these helps you recognize suspicious network behavior and configure basic protections.",
+          "content_uz": "## Kompyuter tarmoqlari\n\nTarmoq qurilmalarni ma'lumot almashish uchun bog'laydi.",
+          "content_ru": "## Компьютерные сети\n\nСеть соединяет устройства для обмена данными."
+        },
+        {
+          "id": "https-encryption",
+          "title": "HTTP, HTTPS and Encryption",
+          "title_uz": "HTTP, HTTPS va shifrlash",
+          "title_ru": "HTTP, HTTPS и шифрование",
+          "order": 2,
+          "duration": "16 min",
+          "objectives": ["Difference between HTTP and HTTPS", "What TLS does", "Why encryption matters"],
+          "content_en": "## HTTP vs HTTPS\n\n- **HTTP** — data is sent in plain text. Anyone on the network can read it.\n- **HTTPS** — data is encrypted with TLS. Even if intercepted, it is unreadable without the keys.\n\nAlways check for HTTPS on login pages, banking, and any form that asks for personal data.",
+          "content_uz": "## HTTP va HTTPS\n\nHTTPS ma'lumotlarni shifrlaydi. Login va bank sahifalarida doimo HTTPS ni tekshiring.",
+          "content_ru": "## HTTP и HTTPS\n\nHTTPS шифрует данные. Всегда проверяйте HTTPS на страницах входа и банкинга."
+        },
+        {
+          "id": "firewall-vpn",
+          "title": "Firewalls and VPNs",
+          "title_uz": "Firewall va VPN",
+          "title_ru": "Межсетевые экраны и VPN",
+          "order": 3,
+          "duration": "15 min",
+          "objectives": ["What a firewall does", "When to use a VPN", "Limitations of VPNs"],
+          "content_en": "## Firewalls\n\nA firewall filters network traffic based on rules. It can block unwanted incoming connections and sometimes control outgoing traffic.\n\n## VPNs\n\nA VPN creates an encrypted tunnel between your device and a VPN server. Useful on public Wi-Fi. Note: a VPN does not make you anonymous to the sites you visit, and a free/low-quality VPN can be risky.",
+          "content_uz": "## Firewall va VPN\n\nFirewall trafikni filtrlaysi. VPN shifrlangan tunnel yaratadi — ommaviy Wi-Fi da foydali.",
+          "content_ru": "## Файрволы и VPN\n\nФайрвол фильтрует трафик. VPN создаёт зашифрованный туннель — полезен в публичных Wi-Fi."
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "title": "Advanced",
+      "title_uz": "Ilg'or",
+      "title_ru": "Продвинутый",
+      "lessons": [
+        {
+          "id": "owasp-top10",
+          "title": "OWASP Top 10 Overview",
+          "title_uz": "OWASP Top 10 ga umumiy nazar",
+          "title_ru": "Обзор OWASP Top 10",
+          "order": 1,
+          "duration": "20 min",
+          "objectives": ["Know the most critical web application risks", "Understand defensive mindset"],
+          "content_en": "## OWASP Top 10\n\nThe OWASP Top 10 is a standard awareness document for developers and web application security. It represents a broad consensus about the most critical security risks to web applications.\n\nKey categories (examples):\n- Broken Access Control\n- Cryptographic Failures\n- Injection\n- Insecure Design\n- Security Misconfiguration\n\nThis course focuses on **defensive** understanding — how these issues arise and how to prevent them, not how to exploit systems.",
+          "content_uz": "## OWASP Top 10\n\nVeb-ilovalar uchun eng muhim xavfsizlik xavflari ro'yxati. Bu kurs himoya nuqtai nazaridan tushuntiriladi.",
+          "content_ru": "## OWASP Top 10\n\nСписок наиболее критических рисков безопасности веб-приложений. Курс объясняет с защитной точки зрения."
+        },
+        {
+          "id": "xss-sqli-concepts",
+          "title": "XSS and SQL Injection Concepts",
+          "title_uz": "XSS va SQL Injection tushunchalari",
+          "title_ru": "Концепции XSS и SQL Injection",
+          "order": 2,
+          "duration": "18 min",
+          "objectives": ["High-level understanding of injection and XSS", "Prevention principles"],
+          "content_en": "## Injection & XSS (Educational Overview)\n\n**SQL Injection** happens when untrusted input is concatenated into database queries. Prevention: use parameterized queries / prepared statements, never build SQL with string concatenation of user input.\n\n**Cross-Site Scripting (XSS)** happens when untrusted data is rendered as active content in a page. Prevention: output encoding, Content Security Policy (CSP), careful handling of HTML.\n\nWe study these only to understand how to build safer applications and recognize risks.",
+          "content_uz": "## Injection va XSS (ta'limiy)\n\nFaqat himoya maqsadida o'rganiladi: parametrlangan so'rovlar va to'g'ri kodlash yordamida oldini olish.",
+          "content_ru": "## Injection и XSS (образовательно)\n\nИзучаем только для понимания защиты: параметризованные запросы и правильное кодирование вывода."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — CyberShield</title>
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .dash-layout { display: flex; min-height: 100vh; padding-top: 70px; }
+    .sidebar {
+      width: 260px;
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border);
+      padding: 24px 16px;
+      position: fixed;
+      top: 70px;
+      bottom: 0;
+      overflow-y: auto;
+    }
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 4px;
+      transition: var(--transition);
+    }
+    .sidebar-link:hover, .sidebar-link.active {
+      background: var(--bg-card-hover);
+      color: var(--text-primary);
+    }
+    .sidebar-link.active { color: var(--primary); }
+    .main-content {
+      flex: 1;
+      margin-left: 260px;
+      padding: 32px;
+    }
+    .welcome-card {
+      background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(6,182,212,0.08));
+      border: 1px solid rgba(99,102,241,0.2);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+    .welcome-card h1 { font-size: 1.75rem; margin-bottom: 8px; }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+    .stat-card .label { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 8px; }
+    .stat-card .value { font-size: 1.75rem; font-weight: 700; }
+    .stat-card .icon { font-size: 1.5rem; margin-bottom: 12px; }
+    @media (max-width: 900px) {
+      .sidebar { display: none; }
+      .main-content { margin-left: 0; padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="../index.html" class="logo">
+        <div class="logo-icon">🛡️</div>
+        <span>CyberShield</span>
+      </a>
+      <div class="nav-actions">
+        <select class="lang-select" data-lang-select>
+          <option value="uz">UZ</option>
+          <option value="en">EN</option>
+          <option value="ru">RU</option>
+        </select>
+        <button class="icon-btn" data-theme-toggle></button>
+        <span class="text-muted text-sm" data-username></span>
+        <button class="btn btn-ghost btn-sm" data-logout data-i18n="nav.logout">Chiqish</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dash-layout">
+    <aside class="sidebar">
+      <a href="dashboard.html" class="sidebar-link active">📊 Dashboard</a>
+      <a href="learning.html" class="sidebar-link">📚 Learning Center</a>
+      <a href="threats.html" class="sidebar-link">⚠️ Threats</a>
+      <a href="tools.html" class="sidebar-link">🛠️ Tools</a>
+      <a href="quiz.html" class="sidebar-link">📝 Quizzes</a>
+      <a href="ai-mentor.html" class="sidebar-link">🤖 AI Mentor</a>
+      <a href="progress.html" class="sidebar-link">📈 My Progress</a>
+      <a href="achievements.html" class="sidebar-link">🏆 Achievements</a>
+      <a href="dictionary.html" class="sidebar-link">📖 Dictionary</a>
+      <a href="checklist.html" class="sidebar-link">✅ Checklists</a>
+      <a href="settings.html" class="sidebar-link">⚙️ Settings</a>
+      <div data-admin class="hidden">
+        <hr style="border-color: var(--border); margin: 16px 0;">
+        <a href="../admin/dashboard.html" class="sidebar-link">🔐 Admin Panel</a>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <div class="welcome-card">
+        <h1>Welcome back, <span data-username>User</span>! 👋</h1>
+        <p class="text-muted">Continue your cybersecurity learning journey.</p>
+        <div class="mt-4">
+          <a href="learning.html" class="btn btn-primary">Continue Learning</a>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="icon">📖</div>
+          <div class="label">Completed Lessons</div>
+          <div class="value" id="statCompleted">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="icon">📚</div>
+          <div class="label">Total Lessons</div>
+          <div class="value" id="statTotal">30</div>
+        </div>
+        <div class="stat-card">
+          <div class="icon">🎯</div>
+          <div class="label">Quiz Average</div>
+          <div class="value" id="statQuiz">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="icon">🔥</div>
+          <div class="label">Learning Streak</div>
+          <div class="value" id="statStreak">0 days</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="mb-4">Daily Cybersecurity Tip</h3>
+        <p id="dailyTip" class="text-muted">Always enable two-factor authentication (2FA) on important accounts. It significantly reduces the risk of unauthorized access even if your password is compromised.</p>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/storage.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/language.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!Auth.requireAuth()) return;
+      updateNavAuth();
+
+      // Load basic stats from localStorage (will be expanded later)
+      const progress = Storage.get('cybershield_progress_' + Auth.getCurrentUser().id, {});
+      document.getElementById('statCompleted').textContent = progress.completedLessons || 0;
+      document.getElementById('statStreak').textContent = (progress.streak || 0) + ' days';
+      if (progress.quizAvg) {
+        document.getElementById('statQuiz').textContent = progress.quizAvg + '%';
+      }
+    });
+  </script>
+</body>
+</html>

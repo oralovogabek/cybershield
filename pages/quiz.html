@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quizzes — CyberShield</title>
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .page { padding-top: 90px; padding-bottom: 60px; }
+    .quiz-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+    .quiz-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; cursor: pointer; transition: var(--transition); }
+    .quiz-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+    .question-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; margin-bottom: 20px; }
+    .option { display: block; padding: 14px 18px; border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 10px; cursor: pointer; transition: var(--transition); }
+    .option:hover { border-color: var(--primary); background: var(--bg-card-hover); }
+    .option.selected { border-color: var(--primary); background: rgba(99,102,241,0.12); }
+    .option.correct { border-color: var(--success); background: rgba(16,185,129,0.12); }
+    .option.wrong { border-color: var(--danger); background: rgba(239,68,68,0.12); }
+    .result-score { font-size: 3rem; font-weight: 800; text-align: center; margin: 20px 0; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="../index.html" class="logo"><div class="logo-icon">🛡️</div><span>CyberShield</span></a>
+      <div class="nav-links">
+        <a href="learning.html" class="nav-link">Learning</a>
+        <a href="tools.html" class="nav-link">Tools</a>
+        <a href="quiz.html" class="nav-link active">Quizzes</a>
+        <a href="ai-mentor.html" class="nav-link">AI Mentor</a>
+      </div>
+      <div class="nav-actions">
+        <select class="lang-select" data-lang-select><option value="uz">UZ</option><option value="en">EN</option><option value="ru">RU</option></select>
+        <button class="icon-btn" data-theme-toggle></button>
+        <a href="dashboard.html" class="btn btn-outline btn-sm">Dashboard</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page">
+    <div class="container" style="max-width:720px;">
+      <div id="quizApp">
+        <h1 style="font-size:1.8rem;margin-bottom:8px;">📝 Cyber Quizzes</h1>
+        <p class="text-muted mb-6">Test your knowledge. Results are saved to your progress.</p>
+        <div class="quiz-list" id="quizList"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/storage.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/language.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/learning.js"></script>
+  <script src="../js/quiz.js"></script>
+  <script>
+    let state = 'list'; // list | quiz | result
+    let currentQ = 0;
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      Theme.init();
+      await Language.init();
+      await QuizEngine.load();
+      renderList();
+    });
+
+    function renderList() {
+      state = 'list';
+      const app = document.getElementById('quizApp');
+      const quizzes = QuizEngine.data.quizzes;
+      app.innerHTML = `
+        <h1 style="font-size:1.8rem;margin-bottom:8px;">📝 Cyber Quizzes</h1>
+        <p class="text-muted mb-6">Test your knowledge. Results are saved to your progress.</p>
+        <div class="quiz-list">
+          ${quizzes.map(q => `
+            <div class="quiz-card" onclick="startQuiz('${q.id}')">
+              <span class="badge badge-primary mb-2">${q.difficulty}</span>
+              <h3 style="margin:8px 0;">${q.title}</h3>
+              <p class="text-sm text-muted">${q.questions.length} questions · ${q.category}</p>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function startQuiz(id) {
+      const quiz = QuizEngine.start(id);
+      if (!quiz) return;
+      currentQ = 0;
+      state = 'quiz';
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      const quiz = QuizEngine.current;
+      const q = quiz.questions[currentQ];
+      const app = document.getElementById('quizApp');
+      app.innerHTML = `
+        <div class="flex justify-between items-center mb-4">
+          <span class="text-muted">Question ${currentQ + 1} / ${quiz.questions.length}</span>
+          <span class="badge badge-primary">${quiz.title}</span>
+        </div>
+        <div class="progress-bar-wrap" style="height:6px;background:var(--border);border-radius:3px;margin-bottom:24px;">
+          <div style="height:100%;width:${((currentQ)/quiz.questions.length)*100}%;background:var(--primary);border-radius:3px;transition:width 0.3s;"></div>
+        </div>
+        <div class="question-card">
+          <h2 style="font-size:1.25rem;margin-bottom:24px;">${q.question}</h2>
+          ${q.options.map((opt, i) => `
+            <div class="option ${QuizEngine.answers[q.id]===i?'selected':''}" onclick="selectOption('${q.id}', ${i})">${opt}</div>
+          `).join('')}
+        </div>
+        <div class="flex justify-between mt-4">
+          <button class="btn btn-outline" onclick="${currentQ>0?'prevQ()':'renderList()'}" >${currentQ>0?'Previous':'Cancel'}</button>
+          <button class="btn btn-primary" onclick="nextQ()" ${QuizEngine.answers[q.id]===undefined?'disabled':''}>
+            ${currentQ < quiz.questions.length - 1 ? 'Next' : 'Finish'}
+          </button>
+        </div>
+      `;
+    }
+
+    function selectOption(qid, idx) {
+      QuizEngine.answer(qid, idx);
+      renderQuestion();
+    }
+
+    function nextQ() {
+      if (currentQ < QuizEngine.current.questions.length - 1) {
+        currentQ++;
+        renderQuestion();
+      } else {
+        finishQuiz();
+      }
+    }
+
+    function prevQ() {
+      if (currentQ > 0) { currentQ--; renderQuestion(); }
+    }
+
+    function finishQuiz() {
+      const result = QuizEngine.calculate();
+      const user = Auth.getCurrentUser();
+      if (user) QuizEngine.saveResult(user.id, result);
+      else Toast.info('Login to save quiz history');
+
+      state = 'result';
+      const app = document.getElementById('quizApp');
+      app.innerHTML = `
+        <div class="card text-center">
+          <h2>Quiz Complete</h2>
+          <div class="result-score" style="color:${result.score>=70?'var(--success)':'var(--warning)'}">${result.score}%</div>
+          <p class="text-muted mb-4">${result.correct} / ${result.total} correct · ${result.timeSpent}s</p>
+          <div class="flex justify-center gap-3 mb-6">
+            <button class="btn btn-primary" onclick="renderList()">Back to Quizzes</button>
+            <button class="btn btn-outline" onclick="startQuiz('${result.quizId}')">Retry</button>
+          </div>
+          <div class="text-left">
+            <h3 class="mb-4">Review</h3>
+            ${result.details.map((d,i) => `
+              <div class="question-card" style="padding:20px;">
+                <p class="font-medium mb-2">${i+1}. ${d.question}</p>
+                <p class="text-sm ${d.isCorrect?'':'text-muted'}">Your answer: ${d.options[d.userAnswer] ?? '—'}</p>
+                ${!d.isCorrect ? `<p class="text-sm" style="color:var(--success)">Correct: ${d.options[d.correctAnswer]}</p>` : ''}
+                <p class="text-sm text-muted mt-2">${d.explanation}</p>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // expose for onclick
+    window.startQuiz = startQuiz;
+    window.selectOption = selectOption;
+    window.nextQ = nextQ;
+    window.prevQ = prevQ;
+    window.renderList = renderList;
+  </script>
+</body>
+</html>

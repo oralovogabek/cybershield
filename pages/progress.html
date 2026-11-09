@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Progress — CyberShield</title>
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .page { padding-top: 90px; padding-bottom: 60px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 32px; }
+    .stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; text-align: center; }
+    .stat-card .val { font-size: 1.8rem; font-weight: 700; }
+    .stat-card .lbl { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
+    .history-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="../index.html" class="logo"><div class="logo-icon">🛡️</div><span>CyberShield</span></a>
+      <div class="nav-actions">
+        <select class="lang-select" data-lang-select><option value="uz">UZ</option><option value="en">EN</option><option value="ru">RU</option></select>
+        <button class="icon-btn" data-theme-toggle></button>
+        <a href="dashboard.html" class="btn btn-outline btn-sm">Dashboard</a>
+      </div>
+    </div>
+  </nav>
+  <div class="page"><div class="container">
+    <h1 style="font-size:1.8rem;margin-bottom:24px;">📈 My Progress</h1>
+    <div class="stats-grid" id="stats"></div>
+    <div class="card">
+      <h3 class="mb-4">Quiz History</h3>
+      <div id="history"></div>
+    </div>
+  </div></div>
+  <script src="../js/storage.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/language.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/learning.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      Theme.init(); await Language.init();
+      if (!Auth.requireAuth()) return;
+      await Learning.load();
+      const user = Auth.getCurrentUser();
+      const p = Learning.getProgress(user.id);
+      const all = Learning.getAllLessons();
+      const done = p.completedLessons?.length || 0;
+      const pct = all.length ? Math.round(done / all.length * 100) : 0;
+      document.getElementById('stats').innerHTML = `
+        <div class="stat-card"><div class="val">${done}</div><div class="lbl">Lessons completed</div></div>
+        <div class="stat-card"><div class="val">${all.length}</div><div class="lbl">Total lessons</div></div>
+        <div class="stat-card"><div class="val">${pct}%</div><div class="lbl">Completion</div></div>
+        <div class="stat-card"><div class="val">${p.quizAvg ?? '—'}${p.quizAvg!=null?'%':''}</div><div class="lbl">Quiz average</div></div>
+        <div class="stat-card"><div class="val">${p.streak || 0}</div><div class="lbl">Day streak</div></div>
+        <div class="stat-card"><div class="val">${p.quizHistory?.length || 0}</div><div class="lbl">Quizzes taken</div></div>
+      `;
+      const hist = p.quizHistory || [];
+      document.getElementById('history').innerHTML = hist.length
+        ? hist.map(h => `<div class="history-item"><span>${h.title}</span><span class="font-semibold">${h.score}%</span><span class="text-sm text-muted">${new Date(h.date).toLocaleDateString()}</span></div>`).join('')
+        : '<p class="text-muted">No quizzes taken yet. <a href="quiz.html" style="color:var(--primary)">Take a quiz</a></p>';
+    });
+  </script>
+</body>
+</html>

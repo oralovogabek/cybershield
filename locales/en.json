@@ -1,0 +1,77 @@
+{
+  "nav": {
+    "home": "Home",
+    "learning": "Learning Center",
+    "threats": "Threats",
+    "tools": "Tools",
+    "quiz": "Quizzes",
+    "aiMentor": "AI Mentor",
+    "login": "Login",
+    "register": "Sign Up",
+    "dashboard": "Dashboard",
+    "logout": "Logout"
+  },
+  "hero": {
+    "badge": "Professional Cybersecurity Education",
+    "title": "Learn Cybersecurity.",
+    "titleHighlight": "Protect Your Digital World.",
+    "description": "CyberShield is a modern platform to learn cybersecurity from scratch, practice with interactive exercises, and chat with an AI Cybersecurity Mentor.",
+    "getStarted": "Get Started",
+    "explore": "Explore Courses",
+    "stat1": "30+",
+    "stat1Label": "Lessons",
+    "stat2": "100+",
+    "stat2Label": "Quiz Questions",
+    "stat3": "3",
+    "stat3Label": "Languages"
+  },
+  "features": {
+    "title": "Why CyberShield?",
+    "subtitle": "Modern and practical cybersecurity education",
+    "f1Title": "Complete Curriculum",
+    "f1Desc": "Structured lessons from beginner to advanced: phishing, network security, OWASP and more.",
+    "f2Title": "AI Cybersecurity Mentor",
+    "f2Desc": "An AI assistant that answers your questions, explains concepts, and recommends next steps.",
+    "f3Title": "Interactive Tools",
+    "f3Desc": "Password checker, phishing simulator, URL analyzer and other safe learning tools.",
+    "f4Title": "Progress & Achievements",
+    "f4Desc": "Track your learning journey, save quiz results and unlock achievements."
+  },
+  "cta": {
+    "title": "Start learning today",
+    "description": "Create a free account and take your first cybersecurity lesson.",
+    "button": "Sign Up Free"
+  },
+  "auth": {
+    "loginTitle": "Sign in to your account",
+    "loginSubtitle": "Welcome back to CyberShield",
+    "registerTitle": "Create a new account",
+    "registerSubtitle": "Start your cybersecurity journey",
+    "username": "Username",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "loginBtn": "Sign In",
+    "registerBtn": "Create Account",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "usernameHint": "3-20 characters, letters, numbers and _",
+    "passwordHint": "Minimum 6 characters"
+  },
+  "footer": {
+    "tagline": "Learn Cybersecurity. Protect Your Digital World.",
+    "product": "Product",
+    "resources": "Resources",
+    "company": "Company",
+    "rights": "All rights reserved."
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success",
+    "save": "Save",
+    "cancel": "Cancel",
+    "search": "Search...",
+    "theme": "Theme",
+    "language": "Language"
+  }
+}

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberShield — Learn Cybersecurity. Protect Your Digital World.</title>
+  <meta name="description" content="Professional cybersecurity education platform with AI Mentor, interactive tools and quizzes.">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">🛡️</div>
+        <span>CyberShield</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="index.html" class="nav-link active" data-i18n="nav.home">Bosh sahifa</a>
+        <a href="pages/learning.html" class="nav-link" data-i18n="nav.learning">O'quv markazi</a>
+        <a href="pages/threats.html" class="nav-link" data-i18n="nav.threats">Tahdidlar</a>
+        <a href="pages/tools.html" class="nav-link" data-i18n="nav.tools">Vositalar</a>
+        <a href="pages/quiz.html" class="nav-link" data-i18n="nav.quiz">Testlar</a>
+        <a href="pages/ai-mentor.html" class="nav-link" data-i18n="nav.aiMentor">AI Mentor</a>
+      </div>
+
+      <div class="nav-actions">
+        <select class="lang-select" data-lang-select>
+          <option value="uz">UZ</option>
+          <option value="en">EN</option>
+          <option value="ru">RU</option>
+        </select>
+        <button class="icon-btn" data-theme-toggle aria-label="Toggle theme"></button>
+        <button class="icon-btn mobile-menu-btn" data-mobile-menu aria-label="Menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div data-guest>
+          <a href="login.html" class="btn btn-outline btn-sm" data-i18n="nav.login">Kirish</a>
+          <a href="register.html" class="btn btn-primary btn-sm" data-i18n="nav.register">Ro'yxatdan o'tish</a>
+        </div>
+        <div data-auth class="hidden flex items-center gap-2">
+          <a href="pages/dashboard.html" class="btn btn-outline btn-sm" data-i18n="nav.dashboard">Boshqaruv paneli</a>
+          <button class="btn btn-ghost btn-sm" data-logout data-i18n="nav.logout">Chiqish</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu">
+    <a href="index.html" class="nav-link" data-i18n="nav.home">Bosh sahifa</a>
+    <a href="pages/learning.html" class="nav-link" data-i18n="nav.learning">O'quv markazi</a>
+    <a href="pages/threats.html" class="nav-link" data-i18n="nav.threats">Tahdidlar</a>
+    <a href="pages/tools.html" class="nav-link" data-i18n="nav.tools">Vositalar</a>
+    <a href="pages/quiz.html" class="nav-link" data-i18n="nav.quiz">Testlar</a>
+    <a href="pages/ai-mentor.html" class="nav-link" data-i18n="nav.aiMentor">AI Mentor</a>
+    <div data-guest style="padding: 8px 0; display: flex; flex-direction: column; gap: 8px;">
+      <a href="login.html" class="btn btn-outline btn-block" data-i18n="nav.login">Kirish</a>
+      <a href="register.html" class="btn btn-primary btn-block" data-i18n="nav.register">Ro'yxatdan o'tish</a>
+    </div>
+    <div data-auth class="hidden" style="padding: 8px 0; display: flex; flex-direction: column; gap: 8px;">
+      <a href="pages/dashboard.html" class="btn btn-outline btn-block" data-i18n="nav.dashboard">Boshqaruv paneli</a>
+      <button class="btn btn-ghost btn-block" data-logout data-i18n="nav.logout">Chiqish</button>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span>🔒</span>
+          <span data-i18n="hero.badge">Professional kiberxavfsizlik ta'limi</span>
+        </div>
+        <h1>
+          <span data-i18n="hero.title">Kiberxavfsizlikni o'rganing.</span><br>
+          <span data-i18n="hero.titleHighlight">Raqamli dunyongizni himoya qiling.</span>
+        </h1>
+        <p class="hero-desc" data-i18n="hero.description">
+          CyberShield — noldan professional darajagacha kiberxavfsizlikni o'rganish, interaktiv mashqlar bajarish va AI Mentor bilan muloqot qilish uchun zamonaviy platforma.
+        </p>
+        <div class="hero-actions">
+          <a href="register.html" class="btn btn-primary btn-lg" data-i18n="hero.getStarted">Boshlash</a>
+          <a href="pages/learning.html" class="btn btn-outline btn-lg" data-i18n="hero.explore">Kurslarni ko'rish</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <h3 data-i18n="hero.stat1">30+</h3>
+            <p data-i18n="hero.stat1Label">Dars</p>
+          </div>
+          <div class="stat-item">
+            <h3 data-i18n="hero.stat2">100+</h3>
+            <p data-i18n="hero.stat2Label">Test savollari</p>
+          </div>
+          <div class="stat-item">
+            <h3 data-i18n="hero.stat3">3</h3>
+            <p data-i18n="hero.stat3Label">Til</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 data-i18n="features.title">Nima uchun CyberShield?</h2>
+        <p data-i18n="features.subtitle">Zamonaviy va amaliy kiberxavfsizlik ta'limi</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon purple">📚</div>
+          <h3 data-i18n="features.f1Title">To'liq o'quv dasturi</h3>
+          <p data-i18n="features.f1Desc">Boshlang'ichdan ilg'or darajagacha tuzilgan darslar: phishing, tarmoq xavfsizligi, OWASP va boshqalar.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon cyan">🤖</div>
+          <h3 data-i18n="features.f2Title">AI Cybersecurity Mentor</h3>
+          <p data-i18n="features.f2Desc">Savollaringizga javob beruvchi, tushuntirishlar beruvchi va keyingi qadamlarni tavsiya qiluvchi sun'iy intellekt yordamchisi.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon green">🛠️</div>
+          <h3 data-i18n="features.f3Title">Interaktiv vositalar</h3>
+          <p data-i18n="features.f3Desc">Parol tekshiruvchi, phishing simulyatori, URL analizatori va boshqa xavfsiz o'quv vositalari.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon orange">🏆</div>
+          <h3 data-i18n="features.f4Title">Progress va yutuqlar</h3>
+          <p data-i18n="features.f4Desc">O'qish jarayonini kuzating, test natijalarini saqlang va yutuqlarni oching.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-box">
+        <h2 data-i18n="cta.title">Bugun o'rganishni boshlang</h2>
+        <p data-i18n="cta.description">Bepul ro'yxatdan o'ting va kiberxavfsizlik bo'yicha birinchi darsingizni o'ting.</p>
+        <a href="register.html" class="btn btn-primary btn-lg" data-i18n="cta.button">Ro'yxatdan o'tish</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <div class="logo-icon">🛡️</div>
+            <span>CyberShield</span>
+          </a>
+          <p data-i18n="footer.tagline">Kiberxavfsizlikni o'rganing. Raqamli dunyongizni himoya qiling.</p>
+        </div>
+        <div class="footer-links">
+          <h4 data-i18n="footer.product">Mahsulot</h4>
+          <a href="pages/learning.html" data-i18n="nav.learning">O'quv markazi</a>
+          <a href="pages/tools.html" data-i18n="nav.tools">Vositalar</a>
+          <a href="pages/quiz.html" data-i18n="nav.quiz">Testlar</a>
+          <a href="pages/ai-mentor.html" data-i18n="nav.aiMentor">AI Mentor</a>
+        </div>
+        <div class="footer-links">
+          <h4 data-i18n="footer.resources">Resurslar</h4>
+          <a href="pages/threats.html" data-i18n="nav.threats">Tahdidlar</a>
+          <a href="pages/dictionary.html">Lug'at</a>
+          <a href="pages/news.html">Yangiliklar</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 CyberShield. <span data-i18n="footer.rights">Barcha huquqlar himoyalangan.</span></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/storage.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/language.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

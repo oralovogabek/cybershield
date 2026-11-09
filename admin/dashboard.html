@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — CyberShield</title>
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .page { padding-top: 90px; padding-bottom: 60px; }
+    .admin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+    .admin-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; text-align: center; }
+    .admin-card h3 { font-size: 1rem; margin-bottom: 8px; }
+    .note { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 24px; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="../index.html" class="logo"><div class="logo-icon">🛡️</div><span>CyberShield Admin</span></a>
+      <div class="nav-actions">
+        <a href="../pages/dashboard.html" class="btn btn-outline btn-sm">User Dashboard</a>
+        <button class="icon-btn" data-theme-toggle></button>
+        <button class="btn btn-ghost btn-sm" data-logout>Logout</button>
+      </div>
+    </div>
+  </nav>
+  <div class="page"><div class="container">
+    <h1 style="font-size:1.8rem;margin-bottom:8px;">🔐 Admin Panel</h1>
+    <div class="note">
+      <strong>Note:</strong> Full admin CRUD (lessons, quizzes, users, news) requires the Django backend (Phase 6–7).
+      This frontend demo shows the structure. Server-side authorization will protect these routes in production.
+      Register with username <code>admin</code> to see the admin link.
+    </div>
+    <div class="admin-grid">
+      <div class="admin-card"><h3>📚 Lessons</h3><p class="text-sm text-muted">Manage curriculum</p></div>
+      <div class="admin-card"><h3>📝 Quizzes</h3><p class="text-sm text-muted">Questions & answers</p></div>
+      <div class="admin-card"><h3>👥 Users</h3><p class="text-sm text-muted">Accounts & roles</p></div>
+      <div class="admin-card"><h3>📰 News</h3><p class="text-sm text-muted">Articles</p></div>
+      <div class="admin-card"><h3>📖 Dictionary</h3><p class="text-sm text-muted">Terms</p></div>
+      <div class="admin-card"><h3>🤖 AI Settings</h3><p class="text-sm text-muted">Mentor config</p></div>
+      <div class="admin-card"><h3>📊 Reports</h3><p class="text-sm text-muted">Analytics</p></div>
+      <div class="admin-card"><h3>⚙️ Site Settings</h3><p class="text-sm text-muted">Configuration</p></div>
+    </div>
+  </div></div>
+  <script src="../js/storage.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/language.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      Theme.init();
+      if (!Auth.requireAuth() || !Auth.isAdmin()) {
+        Toast.error('Admin access required');
+        setTimeout(() => location.href = '../pages/dashboard.html', 1000);
+        return;
+      }
+    });
+  </script>
+</body>
+</html>

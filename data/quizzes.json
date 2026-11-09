@@ -1,0 +1,104 @@
+{
+  "quizzes": [
+    {
+      "id": "beginner-basics",
+      "title": "Cybersecurity Basics",
+      "title_uz": "Kiberxavfsizlik asoslari",
+      "title_ru": "Основы кибербезопасности",
+      "category": "beginner",
+      "difficulty": "easy",
+      "questions": [
+        {
+          "id": "q1",
+          "question": "What does the 'C' in the CIA triad stand for?",
+          "options": ["Confidentiality", "Cybersecurity", "Control", "Cryptography"],
+          "correct": 0,
+          "explanation": "Confidentiality means only authorized people can access the information."
+        },
+        {
+          "id": "q2",
+          "question": "Which of the following is a strong password practice?",
+          "options": ["Using the same password everywhere", "Using at least 12 unique characters", "Using your birthday", "Sharing password with a friend"],
+          "correct": 1,
+          "explanation": "Long, unique passwords that mix character types are much harder to crack."
+        },
+        {
+          "id": "q3",
+          "question": "What is phishing?",
+          "options": ["A type of firewall", "Tricking people into revealing sensitive information", "A strong encryption method", "A password manager feature"],
+          "correct": 1,
+          "explanation": "Phishing is a social engineering attack that tricks victims into giving away credentials or installing malware."
+        },
+        {
+          "id": "q4",
+          "question": "What is the recommended second factor for 2FA?",
+          "options": ["SMS only", "Authenticator app or security key", "Email recovery only", "Security questions"],
+          "correct": 1,
+          "explanation": "Authenticator apps and hardware keys are more secure than SMS."
+        },
+        {
+          "id": "q5",
+          "question": "HTTPS protects data by using:",
+          "options": ["Plain text transmission", "Encryption (TLS)", "Faster loading only", "Blocking all ads"],
+          "correct": 1,
+          "explanation": "HTTPS uses TLS to encrypt the connection between browser and server."
+        }
+      ]
+    },
+    {
+      "id": "phishing-quiz",
+      "title": "Phishing Awareness Quiz",
+      "title_uz": "Fishing xabardorligi testi",
+      "title_ru": "Тест по фишингу",
+      "category": "phishing",
+      "difficulty": "easy",
+      "questions": [
+        {
+          "id": "p1",
+          "question": "Which is a common phishing red flag?",
+          "options": ["Perfect grammar and official logo", "Urgent threat and suspicious sender address", "Message from a colleague you expected", "Official company domain"],
+          "correct": 1,
+          "explanation": "Urgency + slightly wrong domains are classic phishing tactics."
+        },
+        {
+          "id": "p2",
+          "question": "What should you do with a suspicious email link?",
+          "options": ["Click it quickly to check", "Hover to preview URL and verify via official site", "Forward to all friends", "Reply with your password"],
+          "correct": 1,
+          "explanation": "Never click first. Verify through a known official channel."
+        },
+        {
+          "id": "p3",
+          "question": "A message asks you to “verify your account in 1 hour or it will be deleted”. This is likely:",
+          "options": ["Normal support", "Phishing / social engineering", "A system update", "Two-factor authentication"],
+          "correct": 1,
+          "explanation": "Artificial urgency is a common pressure technique in phishing."
+        }
+      ]
+    },
+    {
+      "id": "password-quiz",
+      "title": "Password Security Quiz",
+      "title_uz": "Parol xavfsizligi testi",
+      "title_ru": "Тест по паролям",
+      "category": "password",
+      "difficulty": "easy",
+      "questions": [
+        {
+          "id": "pw1",
+          "question": "What is the biggest risk of reusing passwords?",
+          "options": ["Slower login", "One breach can compromise many accounts", "Harder to remember", "None"],
+          "correct": 1,
+          "explanation": "Credential stuffing attacks reuse leaked passwords on other sites."
+        },
+        {
+          "id": "pw2",
+          "question": "A password manager helps you:",
+          "options": ["Use the same password everywhere", "Generate and store unique strong passwords", "Share passwords publicly", "Disable 2FA"],
+          "correct": 1,
+          "explanation": "Password managers make unique strong passwords practical."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings — CyberShield</title>
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>.page{padding-top:90px;padding-bottom:60px;}</style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="../index.html" class="logo"><div class="logo-icon">🛡️</div><span>CyberShield</span></a>
+      <div class="nav-actions">
+        <a href="dashboard.html" class="btn btn-outline btn-sm">Dashboard</a>
+        <button class="icon-btn" data-theme-toggle></button>
+      </div>
+    </div>
+  </nav>
+  <div class="page"><div class="container" style="max-width:560px;">
+    <h1 style="font-size:1.8rem;margin-bottom:24px;">⚙️ Settings</h1>
+    <div class="card mb-4">
+      <h3 class="mb-4">Appearance</h3>
+      <div class="flex justify-between items-center">
+        <span>Theme</span>
+        <button class="btn btn-outline btn-sm" data-theme-toggle>Toggle Dark / Light</button>
+      </div>
+    </div>
+    <div class="card mb-4">
+      <h3 class="mb-4">Language</h3>
+      <select class="form-input" data-lang-select>
+        <option value="uz">O'zbek</option>
+        <option value="en">English</option>
+        <option value="ru">Русский</option>
+      </select>
+    </div>
+    <div class="card mb-4">
+      <h3 class="mb-4">Account</h3>
+      <p class="text-muted mb-2">Logged in as: <strong data-username></strong></p>
+      <button class="btn btn-outline btn-sm" data-logout>Logout</button>
+    </div>
+    <div class="card">
+      <h3 class="mb-4">Data</h3>
+      <p class="text-sm text-muted mb-4">Clear local learning progress (lessons, quizzes, achievements) for this browser.</p>
+      <button class="btn btn-outline btn-sm" id="btnClearData" style="border-color:var(--danger);color:var(--danger);">Clear progress data</button>
+    </div>
+  </div></div>
+  <script src="../js/storage.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/language.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      Theme.init(); await Language.init();
+      if (!Auth.requireAuth()) return;
+      updateNavAuth();
+      document.getElementById('btnClearData').onclick = () => {
+        if (!confirm('Clear all local progress?')) return;
+        const u = Auth.getCurrentUser();
+        Storage.remove('cybershield_progress_' + u.id);
+        Storage.remove('cybershield_achievements_' + u.id);
+        Storage.remove('cybershield_checklist');
+        Toast.success('Progress cleared');
+      };
+    });
+  </script>
+</body>
+</html>

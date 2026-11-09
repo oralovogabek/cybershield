@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson — CyberShield</title>
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .page { padding-top: 90px; padding-bottom: 80px; }
+    .lesson-header { margin-bottom: 32px; }
+    .lesson-body { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; line-height: 1.75; }
+    .lesson-body h2 { margin: 28px 0 12px; font-size: 1.3rem; }
+    .lesson-body h3 { margin: 20px 0 10px; font-size: 1.1rem; }
+    .lesson-body ul, .lesson-body ol { margin: 12px 0 12px 24px; }
+    .lesson-body li { margin-bottom: 6px; }
+    .lesson-body p { margin-bottom: 12px; color: var(--text-secondary); }
+    .lesson-body strong { color: var(--text-primary); }
+    .objectives { background: rgba(99,102,241,0.08); border: 1px solid rgba(99,102,241,0.2); border-radius: var(--radius-sm); padding: 20px; margin-bottom: 24px; }
+    .objectives h3 { margin-bottom: 12px; }
+    .objectives li { margin-bottom: 6px; }
+    .lesson-nav { display: flex; justify-content: space-between; gap: 16px; margin-top: 32px; flex-wrap: wrap; }
+    .lang-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+    .lang-tab { padding: 8px 16px; border-radius: var(--radius-sm); border: 1px solid var(--border); cursor: pointer; font-size: 0.875rem; }
+    .lang-tab.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="../index.html" class="logo"><div class="logo-icon">🛡️</div><span>CyberShield</span></a>
+      <div class="nav-actions">
+        <a href="learning.html" class="btn btn-outline btn-sm">← Back to Learning</a>
+        <select class="lang-select" data-lang-select><option value="uz">UZ</option><option value="en">EN</option><option value="ru">RU</option></select>
+        <button class="icon-btn" data-theme-toggle></button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page">
+    <div class="container" style="max-width:800px;">
+      <div id="lessonContent">
+        <div class="skeleton" style="height:400px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/storage.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/language.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/learning.js"></script>
+  <script>
+    function simpleMarkdown(md) {
+      return md
+        .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+        .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+        .replace(/^# (.*$)/gim, '<h2>$1</h2>')
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/^- (.*$)/gim, '<li>$1</li>')
+        .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
+        .replace(/\n\n/g, '</p><p>')
+        .replace(/^(?!<[hulo])/gm, (m) => m ? '<p>' + m : m);
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      Theme.init();
+      await Language.init();
+      await Learning.load();
+
+      const params = new URLSearchParams(location.search);
+      const id = params.get('id');
+      const lesson = Learning.getLesson(id);
+      const container = document.getElementById('lessonContent');
+
+      if (!lesson) {
+        container.innerHTML = '<div class="card text-center"><h2>Lesson not found</h2><a href="learning.html" class="btn btn-primary mt-4">Back</a></div>';
+        return;
+      }
+
+      let contentLang = Language.current === 'uz' || Language.current === 'ru' ? Language.current : 'en';
+      const user = Auth.getCurrentUser();
+      const userId = user ? user.id : 'guest';
+      const completed = Learning.isCompleted(userId, lesson.id);
+      const all = Learning.getAllLessons();
+      const idx = all.findIndex(l => l.id === lesson.id);
+      const prev = idx > 0 ? all[idx - 1] : null;
+      const next = idx < all.length - 1 ? all[idx + 1] : null;
+
+      function render() {
+        const title = Learning.getTitle(lesson, contentLang);
+        const content = Learning.getContent(lesson, contentLang);
+        document.title = title + ' — CyberShield';
+
+        container.innerHTML = `
+          <div class="lesson-header">
+            <div class="flex gap-2 mb-4">
+              <span class="badge badge-primary">${lesson.levelTitle || ''}</span>
+              ${completed ? '<span class="badge badge-success">Completed</span>' : ''}
+              <span class="text-sm text-muted">${lesson.duration || ''}</span>
+            </div>
+            <h1 style="font-size:1.75rem;margin-bottom:16px;">${title}</h1>
+            <div class="lang-tabs">
+              <button class="lang-tab ${contentLang==='en'?'active':''}" data-cl="en">English</button>
+              <button class="lang-tab ${contentLang==='uz'?'active':''}" data-cl="uz">O'zbek</button>
+              <button class="lang-tab ${contentLang==='ru'?'active':''}" data-cl="ru">Русский</button>
+            </div>
+          </div>
+          ${lesson.objectives ? `
+          <div class="objectives">
+            <h3>Learning Objectives</h3>
+            <ul>${lesson.objectives.map(o => `<li>${o}</li>`).join('')}</ul>
+          </div>` : ''}
+          <div class="lesson-body">${simpleMarkdown(content)}</div>
+          <div class="lesson-nav">
+            <div>${prev ? `<a href="lesson.html?id=${prev.id}" class="btn btn-outline">← Previous</a>` : '<span></span>'}</div>
+            <div class="flex gap-3">
+              ${!completed ? `<button class="btn btn-primary" id="markDone">Mark as Completed</button>` : `<span class="badge badge-success" style="padding:12px 16px;">✓ Completed</span>`}
+              ${next ? `<a href="lesson.html?id=${next.id}" class="btn btn-accent">Next →</a>` : ''}
+            </div>
+          </div>
+        `;
+
+        container.querySelectorAll('[data-cl]').forEach(btn => {
+          btn.onclick = () => { contentLang = btn.dataset.cl; render(); };
+        });
+
+        const markBtn = document.getElementById('markDone');
+        if (markBtn) {
+          markBtn.onclick = () => {
+            if (!Auth.isLoggedIn()) {
+              Toast.warning('Please login to save progress');
+              setTimeout(() => location.href = '../login.html', 1000);
+              return;
+            }
+            Learning.markCompleted(userId, lesson.id);
+            Toast.success('Lesson marked as completed!');
+            render();
+          };
+        }
+      }
+      render();
+    });
+  </script>
+</body>
+</html>

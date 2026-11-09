@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Achievements — CyberShield</title>
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .page { padding-top: 90px; padding-bottom: 60px; }
+    .ach-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+    .ach-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; text-align: center; opacity: 0.45; transition: var(--transition); }
+    .ach-card.unlocked { opacity: 1; border-color: var(--primary); }
+    .ach-icon { font-size: 2.5rem; margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="../index.html" class="logo"><div class="logo-icon">🛡️</div><span>CyberShield</span></a>
+      <div class="nav-actions">
+        <select class="lang-select" data-lang-select><option value="uz">UZ</option><option value="en">EN</option><option value="ru">RU</option></select>
+        <button class="icon-btn" data-theme-toggle></button>
+        <a href="dashboard.html" class="btn btn-outline btn-sm">Dashboard</a>
+      </div>
+    </div>
+  </nav>
+  <div class="page"><div class="container">
+    <h1 style="font-size:1.8rem;margin-bottom:8px;">🏆 Achievements</h1>
+    <p class="text-muted mb-6">Unlock badges by learning and practicing.</p>
+    <div class="ach-grid" id="grid"></div>
+  </div></div>
+  <script src="../js/storage.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/language.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/learning.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      Theme.init(); Language.init();
+      if (!Auth.requireAuth()) return;
+      const user = Auth.getCurrentUser();
+      Achievements.check(user.id);
+      const unlocked = Achievements.getUnlocked(user.id);
+      document.getElementById('grid').innerHTML = Achievements.list.map(a => {
+        const u = unlocked.find(x => x.id === a.id);
+        return `<div class="ach-card ${u?'unlocked':''}">
+          <div class="ach-icon">${a.icon}</div>
+          <h3>${a.name}</h3>
+          <p class="text-sm text-muted mt-2">${a.desc}</p>
+          ${u ? `<p class="text-sm mt-2" style="color:var(--success)">Unlocked ${new Date(u.unlockedAt).toLocaleDateString()}</p>` : '<p class="text-sm mt-2 text-muted">Locked</p>'}
+        </div>`;
+      }).join('');
+    });
+  </script>
+</body>
+</html>

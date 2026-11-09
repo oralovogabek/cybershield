@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Mentor — CyberShield</title>
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .page { padding-top: 70px; height: 100vh; display: flex; flex-direction: column; }
+    .chat-wrap { flex: 1; display: flex; flex-direction: column; max-width: 800px; margin: 0 auto; width: 100%; padding: 0 16px; }
+    .chat-messages { flex: 1; overflow-y: auto; padding: 24px 0; display: flex; flex-direction: column; gap: 16px; }
+    .msg { max-width: 85%; padding: 14px 18px; border-radius: 16px; line-height: 1.55; font-size: 0.95rem; }
+    .msg.user { align-self: flex-end; background: var(--primary); color: #fff; border-bottom-right-radius: 4px; }
+    .msg.bot { align-self: flex-start; background: var(--bg-card); border: 1px solid var(--border); border-bottom-left-radius: 4px; }
+    .msg.system { align-self: center; background: transparent; color: var(--text-muted); font-size: 0.85rem; text-align: center; }
+    .chat-input-area { padding: 16px 0 24px; border-top: 1px solid var(--border); display: flex; gap: 12px; }
+    .chat-input-area input { flex: 1; }
+    .typing { align-self: flex-start; color: var(--text-muted); font-size: 0.9rem; padding: 8px 0; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="../index.html" class="logo"><div class="logo-icon">🛡️</div><span>CyberShield</span></a>
+      <div class="nav-links">
+        <a href="learning.html" class="nav-link">Learning</a>
+        <a href="tools.html" class="nav-link">Tools</a>
+        <a href="quiz.html" class="nav-link">Quizzes</a>
+        <a href="ai-mentor.html" class="nav-link active">AI Mentor</a>
+      </div>
+      <div class="nav-actions">
+        <button class="btn btn-ghost btn-sm" id="btnClear">Clear</button>
+        <select class="lang-select" data-lang-select><option value="uz">UZ</option><option value="en">EN</option><option value="ru">RU</option></select>
+        <button class="icon-btn" data-theme-toggle></button>
+        <a href="dashboard.html" class="btn btn-outline btn-sm">Dashboard</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page">
+    <div class="chat-wrap">
+      <div style="padding:16px 0 0;">
+        <h2 style="font-size:1.2rem;">🤖 CyberShield AI Mentor</h2>
+        <p class="text-sm text-muted">Educational cybersecurity assistant. Defensive focus only.</p>
+      </div>
+      <div class="chat-messages" id="messages">
+        <div class="msg system">AI Mentor is ready. Ask about phishing, passwords, networks, OWASP concepts, and more.</div>
+      </div>
+      <div class="chat-input-area">
+        <input type="text" class="form-input" id="chatInput" placeholder="Ask a cybersecurity question..." autocomplete="off">
+        <button class="btn btn-primary" id="btnSend">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/storage.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/language.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    // Educational fallback knowledge base (no external API key required for demo)
+    const KB = [
+      { keys: ['phishing', 'фишинг', 'fishing'], reply: "Phishing is a social engineering attack where attackers impersonate trusted organizations to steal credentials or deliver malware.\n\n**How to recognize it:**\n• Urgent or threatening language\n• Suspicious sender addresses\n• Unexpected links or attachments\n• Requests for passwords or codes\n\n**What to do:** Never click first. Hover to inspect links, verify via official channels, and report the message. Enable 2FA so stolen passwords alone are not enough." },
+      { keys: ['password', 'parol', 'парол'], reply: "Strong password practices:\n\n1. Use **long unique passwords** (12–16+ characters)\n2. Mix uppercase, lowercase, numbers, symbols\n3. Never reuse passwords across important sites\n4. Use a **password manager**\n5. Enable **2FA** everywhere possible\n\nAvoid birthdays, names, and common words. If a site is breached, change that password immediately and check where else you reused it." },
+      { keys: ['2fa', 'mfa', 'two-factor', 'ikki faktor', 'двухфактор'], reply: "Two-Factor Authentication (2FA) adds a second step after your password.\n\n**Best options:**\n• Authenticator apps (Google Authenticator, Authy, Microsoft Authenticator)\n• Hardware security keys (strongest)\n\nSMS is better than nothing but vulnerable to SIM-swap. Prefer apps or keys for important accounts (email, banking, work)." },
+      { keys: ['malware', 'virus', 'вирус', 'zararli'], reply: "Malware is malicious software: viruses, worms, trojans, ransomware, spyware.\n\n**Prevention:**\n• Keep OS and apps updated\n• Be careful with email attachments and downloads\n• Use reputable security software\n• Avoid 'crack' and pirated software sites\n\nIf infected: disconnect if needed, run a full scan, change important passwords from a clean device, and restore from clean backups when necessary." },
+      { keys: ['https', 'encryption', 'tls', 'shifrlash'], reply: "HTTPS encrypts data between your browser and the website using TLS.\n\nLook for the lock icon and `https://` in the address bar before entering passwords or payment details. HTTP sends data in plain text — avoid it for sensitive actions." },
+      { keys: ['owasp', 'xss', 'sql injection', 'injection'], reply: "OWASP Top 10 lists the most critical web application security risks (broken access control, injection, cryptographic failures, etc.).\n\n**SQL Injection** — prevented with parameterized queries.\n**XSS** — prevented with output encoding and Content-Security-Policy.\n\nWe discuss these only from a **defensive** perspective to help you build and use safer systems." },
+      { keys: ['vpn', 'firewall', 'firewall'], reply: "A **firewall** filters network traffic according to rules.\n\nA **VPN** creates an encrypted tunnel to a VPN server — useful on public Wi-Fi. Note: a VPN does not make you anonymous to websites you visit, and free/low-quality VPNs can be risky. Choose reputable providers." },
+      { keys: ['hello', 'salom', 'привет', 'hi', 'help'], reply: "Hello! I'm the CyberShield AI Mentor. I can explain cybersecurity concepts in simple language — phishing, passwords, 2FA, malware, networks, OWASP basics, and more.\n\nWhat would you like to learn about today?" }
+    ];
+
+    const unsafe = ['hack into', 'steal password', 'make virus', 'ddos attack', 'crack password', 'bypass security', 'unauthorized access'];
+
+    function getReply(text) {
+      const lower = text.toLowerCase();
+      if (unsafe.some(u => lower.includes(u))) {
+        return "I focus only on **defensive** cybersecurity education. I cannot help with attacking systems, stealing credentials, or creating malware.\n\nI can explain how these threats work at a high level and how to **protect** against them. What defensive topic would you like to learn?";
+      }
+      for (const item of KB) {
+        if (item.keys.some(k => lower.includes(k))) return item.reply;
+      }
+      return "Good question! Here's a general answer:\n\nFor cybersecurity topics, start with the basics — strong unique passwords, 2FA, recognizing phishing, keeping software updated, and using HTTPS.\n\nTry asking about: **phishing**, **passwords**, **2FA**, **malware**, **HTTPS**, **VPN**, or **OWASP**.\n\n(Full AI API integration can be connected via the Django backend when configured.)";
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      Theme.init();
+      Language.init();
+      const messages = document.getElementById('messages');
+      const input = document.getElementById('chatInput');
+
+      function addMsg(text, type) {
+        const div = document.createElement('div');
+        div.className = 'msg ' + type;
+        div.innerHTML = text.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        messages.appendChild(div);
+        messages.scrollTop = messages.scrollHeight;
+      }
+
+      async function send() {
+        const text = input.value.trim();
+        if (!text) return;
+        input.value = '';
+        addMsg(text, 'user');
+        const typing = document.createElement('div');
+        typing.className = 'typing';
+        typing.textContent = 'Mentor is typing...';
+        messages.appendChild(typing);
+        messages.scrollTop = messages.scrollHeight;
+        await new Promise(r => setTimeout(r, 600 + Math.random() * 800));
+        typing.remove();
+        addMsg(getReply(text), 'bot');
+      }
+
+      document.getElementById('btnSend').onclick = send;
+      input.onkeydown = (e) => { if (e.key === 'Enter') send(); };
+      document.getElementById('btnClear').onclick = () => {
+        messages.innerHTML = '<div class="msg system">Conversation cleared. Ask a new question.</div>';
+      };
+    });
+  </script>
+</body>
+</html>

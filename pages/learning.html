@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning Center — CyberShield</title>
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .page { padding-top: 90px; padding-bottom: 60px; min-height: 100vh; }
+    .level-section { margin-bottom: 48px; }
+    .level-title { font-size: 1.4rem; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+    .lessons-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+    .lesson-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; transition: var(--transition); cursor: pointer; }
+    .lesson-card:hover { border-color: var(--primary); transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+    .lesson-card.completed { border-color: var(--success); }
+    .lesson-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+    .lesson-meta { display: flex; gap: 12px; font-size: 0.85rem; color: var(--text-muted); margin-top: 16px; }
+    .progress-bar-wrap { height: 8px; background: var(--border); border-radius: 4px; margin: 24px 0; overflow: hidden; }
+    .progress-bar { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); border-radius: 4px; transition: width 0.5s; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="../index.html" class="logo"><div class="logo-icon">🛡️</div><span>CyberShield</span></a>
+      <div class="nav-links">
+        <a href="learning.html" class="nav-link active">Learning</a>
+        <a href="threats.html" class="nav-link">Threats</a>
+        <a href="tools.html" class="nav-link">Tools</a>
+        <a href="quiz.html" class="nav-link">Quizzes</a>
+        <a href="ai-mentor.html" class="nav-link">AI Mentor</a>
+      </div>
+      <div class="nav-actions">
+        <select class="lang-select" data-lang-select><option value="uz">UZ</option><option value="en">EN</option><option value="ru">RU</option></select>
+        <button class="icon-btn" data-theme-toggle></button>
+        <a href="dashboard.html" class="btn btn-outline btn-sm">Dashboard</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page">
+    <div class="container">
+      <h1 style="font-size:1.8rem;margin-bottom:8px;">📚 Learning Center</h1>
+      <p class="text-muted mb-4">Structured cybersecurity curriculum from beginner to advanced.</p>
+      <div id="overallProgress">
+        <div class="flex justify-between text-sm text-muted mb-2">
+          <span>Your progress</span>
+          <span id="progressText">0 / 0</span>
+        </div>
+        <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
+      </div>
+      <div id="levelsContainer">
+        <div class="skeleton" style="height:200px;margin-bottom:20px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/storage.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/language.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/learning.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      Theme.init();
+      await Language.init();
+      updateNavAuth();
+
+      const data = await Learning.load();
+      const user = Auth.getCurrentUser();
+      const userId = user ? user.id : 'guest';
+      const progress = Learning.getProgress(userId);
+      const all = Learning.getAllLessons();
+      const done = progress.completedLessons?.length || 0;
+
+      document.getElementById('progressText').textContent = `${done} / ${all.length}`;
+      document.getElementById('progressBar').style.width = (all.length ? (done / all.length * 100) : 0) + '%';
+
+      const lang = Language.current || 'en';
+      const container = document.getElementById('levelsContainer');
+      container.innerHTML = '';
+
+      data.levels.forEach(level => {
+        const section = document.createElement('div');
+        section.className = 'level-section';
+        const levelTitle = lang === 'uz' ? level.title_uz : (lang === 'ru' ? level.title_ru : level.title);
+        section.innerHTML = `<h2 class="level-title"><span class="badge badge-primary">${levelTitle}</span></h2>`;
+        const grid = document.createElement('div');
+        grid.className = 'lessons-grid';
+
+        level.lessons.forEach(lesson => {
+          const completed = Learning.isCompleted(userId, lesson.id);
+          const card = document.createElement('div');
+          card.className = 'lesson-card' + (completed ? ' completed' : '');
+          card.onclick = () => location.href = `lesson.html?id=${lesson.id}`;
+          const title = Learning.getTitle(lesson, lang);
+          card.innerHTML = `
+            <div class="flex justify-between items-center mb-2">
+              <span class="badge ${completed ? 'badge-success' : 'badge-primary'}">${completed ? '✓ Done' : 'Lesson ' + lesson.order}</span>
+              <span class="text-sm text-muted">${lesson.duration || ''}</span>
+            </div>
+            <h3>${title}</h3>
+            <div class="lesson-meta">
+              <span>${levelTitle}</span>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+        section.appendChild(grid);
+        container.appendChild(section);
+      });
+    });
+  </script>
+</body>
+</html>

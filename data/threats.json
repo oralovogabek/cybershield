@@ -1,0 +1,76 @@
+{
+  "threats": [
+    {
+      "id": "phishing",
+      "title": "Phishing",
+      "title_uz": "Fishing",
+      "title_ru": "Фишинг",
+      "icon": "🎣",
+      "definition": "A social engineering attack that tricks people into revealing sensitive information or installing malware by impersonating trusted entities.",
+      "how": "Attackers send fake emails, messages or create look-alike websites that ask for credentials, payment details or downloads.",
+      "signs": ["Urgent or threatening language", "Suspicious sender address", "Unexpected links or attachments", "Requests for passwords or codes", "Poor grammar"],
+      "prevention": ["Verify sender through official channels", "Hover links before clicking", "Enable 2FA", "Report phishing", "Never enter passwords from email links"],
+      "ifAffected": ["Change passwords immediately from a clean device", "Enable 2FA", "Contact your bank if financial data was shared", "Scan device for malware", "Monitor accounts"]
+    },
+    {
+      "id": "malware",
+      "title": "Malware",
+      "title_uz": "Zararli dastur",
+      "title_ru": "Вредоносное ПО",
+      "icon": "🦠",
+      "definition": "Malicious software designed to damage, disrupt, or gain unauthorized access to systems.",
+      "how": "Often delivered via email attachments, malicious downloads, infected USB drives or compromised websites.",
+      "signs": ["Slow device performance", "Unexpected pop-ups", "Unknown programs", "High network usage", "Disabled security tools"],
+      "prevention": ["Keep OS and software updated", "Use reputable antivirus", "Avoid unknown downloads", "Be careful with email attachments", "Enable browser protections"],
+      "ifAffected": ["Disconnect from network if needed", "Run a full scan", "Change important passwords", "Restore from clean backup if necessary", "Seek professional help for severe cases"]
+    },
+    {
+      "id": "ransomware",
+      "title": "Ransomware",
+      "title_uz": "Ransomware",
+      "title_ru": "Программы-вымогатели",
+      "icon": "🔒",
+      "definition": "Malware that encrypts files and demands payment for the decryption key.",
+      "how": "Usually enters through phishing, remote desktop vulnerabilities or malicious downloads, then encrypts data.",
+      "signs": ["Files become inaccessible", "Ransom note appears", "File extensions changed", "Unable to open documents"],
+      "prevention": ["Regular offline/offline-capable backups", "Keep systems patched", "Limit admin privileges", "Email and web filtering", "User awareness training"],
+      "ifAffected": ["Do not pay immediately — report and seek advice", "Isolate affected systems", "Restore from clean backups", "Report to authorities", "Document everything"]
+    },
+    {
+      "id": "social-engineering",
+      "title": "Social Engineering",
+      "title_uz": "Ijtimoiy muhandislik",
+      "title_ru": "Социальная инженерия",
+      "icon": "🎭",
+      "definition": "Psychological manipulation of people into performing actions or divulging confidential information.",
+      "how": "Attackers exploit trust, fear, urgency or curiosity through phone, email, chat or in person.",
+      "signs": ["Pressure to act quickly", "Unusual requests from 'boss' or 'IT'", "Requests that bypass normal procedures", "Too-good-to-be-true offers"],
+      "prevention": ["Verify identity through separate channels", "Follow official procedures", "Be skeptical of urgency", "Train regularly", "Never share credentials"],
+      "ifAffected": ["Report internally", "Change affected credentials", "Review what information was shared", "Alert colleagues if needed"]
+    },
+    {
+      "id": "identity-theft",
+      "title": "Identity Theft",
+      "title_uz": "Shaxsni o'g'irlash",
+      "title_ru": "Кража личности",
+      "icon": "🪪",
+      "definition": "Stealing personal information to impersonate someone for financial or other gain.",
+      "how": "Through data breaches, phishing, malware, physical document theft or social media oversharing.",
+      "signs": ["Unknown accounts or charges", "Unexpected password reset emails", "Denied credit or services", "IRS/tax issues"],
+      "prevention": ["Minimize shared personal data", "Use strong unique passwords + 2FA", "Monitor accounts and credit", "Shred sensitive documents", "Be careful on social media"],
+      "ifAffected": ["Contact banks and freeze cards", "Report to relevant authorities", "Place fraud alerts", "Change passwords", "Document all activity"]
+    },
+    {
+      "id": "ddos",
+      "title": "DDoS Attacks",
+      "title_uz": "DDoS hujumlari",
+      "title_ru": "DDoS-атаки",
+      "icon": "🌊",
+      "definition": "Distributed Denial of Service — overwhelming a service with traffic so legitimate users cannot access it.",
+      "how": "Attackers use many compromised devices (botnet) to flood a target with requests.",
+      "signs": ["Website or service becomes very slow or unavailable", "Unusual traffic spikes"],
+      "prevention": ["Use DDoS protection services", "Rate limiting", "CDN and scalable infrastructure", "Monitor traffic"],
+      "ifAffected": ["Activate mitigation / contact hosting provider", "Filter traffic", "Communicate with users", "Analyze after the attack"]
+    }
+  ]
+}

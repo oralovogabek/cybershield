@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register — CyberShield</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="auth-header">
+        <a href="index.html" class="logo">
+          <div class="logo-icon">🛡️</div>
+          <span>CyberShield</span>
+        </a>
+        <h1 data-i18n="auth.registerTitle">Yangi hisob yarating</h1>
+        <p data-i18n="auth.registerSubtitle">Kiberxavfsizlikni o'rganishni boshlang</p>
+      </div>
+
+      <form id="registerForm">
+        <div class="form-group">
+          <label class="form-label" data-i18n="auth.username">Foydalanuvchi nomi</label>
+          <input type="text" class="form-input" id="username" name="username" required autocomplete="username" placeholder="ali" minlength="3" maxlength="20">
+          <p class="form-hint" data-i18n="auth.usernameHint">3-20 belgi, harflar, raqamlar va _</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" data-i18n="auth.password">Parol</label>
+          <div class="input-wrapper">
+            <input type="password" class="form-input" id="password" name="password" required autocomplete="new-password" placeholder="••••••" minlength="6">
+            <button type="button" class="toggle-password" data-toggle-password aria-label="Show password">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+          <p class="form-hint" data-i18n="auth.passwordHint">Kamida 6 belgi</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" data-i18n="auth.confirmPassword">Parolni tasdiqlang</label>
+          <div class="input-wrapper">
+            <input type="password" class="form-input" id="confirmPassword" name="confirmPassword" required autocomplete="new-password" placeholder="••••••">
+            <button type="button" class="toggle-password" data-toggle-password aria-label="Show password">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div id="registerError" class="form-error hidden"></div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top: 8px;" data-i18n="auth.registerBtn">
+          Ro'yxatdan o'tish
+        </button>
+      </form>
+
+      <div class="auth-footer">
+        <span data-i18n="auth.hasAccount">Allaqachon hisobingiz bormi?</span>
+        <a href="login.html" data-i18n="nav.login">Kirish</a>
+      </div>
+
+      <div class="flex justify-center gap-3 mt-6">
+        <select class="lang-select" data-lang-select>
+          <option value="uz">UZ</option>
+          <option value="en">EN</option>
+          <option value="ru">RU</option>
+        </select>
+        <button class="icon-btn" data-theme-toggle aria-label="Toggle theme"></button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/language.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (Auth.isLoggedIn()) {
+        window.location.href = 'pages/dashboard.html';
+        return;
+      }
+
+      const form = document.getElementById('registerForm');
+      const errorEl = document.getElementById('registerError');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        errorEl.classList.add('hidden');
+
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        const btn = form.querySelector('button[type="submit"]');
+        const originalText = btn.textContent;
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner" style="width:18px;height:18px;border-width:2px;"></span>';
+
+        const result = await Auth.register(username, password, confirmPassword);
+
+        btn.disabled = false;
+        btn.textContent = originalText;
+
+        if (result.success) {
+          Toast.success('Account created! Welcome, ' + result.user.username);
+          setTimeout(() => {
+            window.location.href = 'pages/dashboard.html';
+          }, 800);
+        } else {
+          errorEl.textContent = result.error;
+          errorEl.classList.remove('hidden');
+          Toast.error(result.error);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
